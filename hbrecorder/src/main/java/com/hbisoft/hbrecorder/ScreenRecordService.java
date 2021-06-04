@@ -25,6 +25,7 @@ import android.os.Environment;
 import android.os.IBinder;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.app.NotificationCompat;
 
 import android.os.ResultReceiver;
 import android.util.Log;
@@ -209,7 +210,18 @@ public class ScreenRecordService extends Service {
                     startForeground(101, notification);
                 }
             } else {
-                startForeground(101, new Notification());
+
+
+                NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                        .setContentTitle("Video Upload")
+                        .setContentText("0%")
+                        .setSmallIcon(R.drawable.icon)
+                        //.setContentIntent(pendingIntent)
+                        .setPriority(Notification.PRIORITY_MAX)
+                        .setProgress(100, 0, false)
+                        .setAutoCancel(false);
+                Notification notification = notificationBuilder.build();
+                startForeground(101, notification);
             }
 
 
